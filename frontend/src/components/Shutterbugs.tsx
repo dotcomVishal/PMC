@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Instagram } from 'lucide-react';
+import { Camera } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +51,7 @@ export default function Shutterbugs() {
             rel="noreferrer"
             className="flex items-center gap-2 mt-6 md:mt-0 px-6 py-3 border border-secondary/30 hover:border-primary hover:bg-primary hover:text-background transition-all duration-300 rounded-full font-medium"
           >
-            <Instagram size={20} />
+            <Camera size={20} />
             <span>@shutterbugs_iitmandi</span>
           </a>
         </div>

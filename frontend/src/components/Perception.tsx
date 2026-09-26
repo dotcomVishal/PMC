@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Youtube, Instagram, Play } from 'lucide-react';
+import { Video, Play } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,10 +46,10 @@ export default function Perception() {
           </div>
           <div className="flex gap-4 mt-6 md:mt-0">
             <a href="https://youtube.com/perception_iitmandi" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
-              <Youtube size={24} />
+              <Video size={24} />
             </a>
             <a href="https://instagram.com/perception_iitmandi" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
-              <Instagram size={24} />
+              <Video size={24} />
             </a>
           </div>
         </div>
