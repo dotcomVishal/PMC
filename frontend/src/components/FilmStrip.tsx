@@ -6,7 +6,7 @@ export default function FilmStrip({ position = 'top' }: { position?: 'top' | 'bo
   return (
     <>
       {(position === 'top' || position === 'both') && (
-        <div className="absolute top-0 left-0 w-full z-0">
+        <div className="absolute top-24 left-0 w-full z-0">
           {strip}
         </div>
       )}

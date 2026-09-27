@@ -6,12 +6,12 @@ import FilmStrip from './FilmStrip';
 gsap.registerPlugin(ScrollTrigger);
 
 const members = [
-  { name: "Aarav Sharma", role: "Coordinator" },
-  { name: "Diya Patel", role: "Head of Photography" },
-  { name: "Rohan Gupta", role: "Head of Videography" },
-  { name: "Ananya Singh", role: "Editor" },
-  { name: "Kabir Das", role: "Photographer" },
-  { name: "Meera Reddy", role: "Creative Director" }
+  { name: "Dev Asnani", role: "Coordinator" },
+  { name: "Arnav Chandan", role: "Co-Coordinator" },
+  { name: "Aarav Bhukmaria", role: "Co-Coordinator" },
+  { name: "Vedansh Tyagi", role: "Core-Member" },
+  { name: "Bhavtosh Tripathi", role: "Core-Member" },
+  { name: "Vishal Singh", role: "Core-Member" }
 ];
 
 export default function Team() {

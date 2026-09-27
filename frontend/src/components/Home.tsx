@@ -76,6 +76,16 @@ export default function Home() {
             />
             {/* Dark overlay to simulate depth fading */}
             <div ref={overlayRef} className="absolute inset-0 bg-black/80"></div>
+            
+            {/* Left Edge Text */}
+            <div className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 -rotate-90 origin-center pointer-events-none mix-blend-plus-lighter opacity-80">
+              <span className="text-white font-display font-bold text-2xl md:text-5xl tracking-tighter" style={{ transform: 'scaleY(1.5)', display: 'inline-block' }}>CHOOSE PASSION.</span>
+            </div>
+            
+            {/* Right Edge Text */}
+            <div className="absolute top-1/2 right-4 md:right-12 -translate-y-1/2 rotate-90 origin-center pointer-events-none mix-blend-plus-lighter opacity-80">
+              <span className="text-white font-display font-bold text-2xl md:text-5xl tracking-tighter" style={{ transform: 'scaleY(1.5)', display: 'inline-block' }}>CHOOSE PMC</span>
+            </div>
           </div>
         </div>
 
