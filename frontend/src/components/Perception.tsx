@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
 import FilmStrip from './FilmStrip';
+import perceptionLogo from '../images/perception.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,7 +39,10 @@ export default function Perception() {
       <div className="max-w-7xl mx-auto relative z-10 pt-8">
         <div className="flex flex-col md:flex-row justify-between items-start mb-16">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-7xl font-display mb-4 text-primary">Perception</h2>
+            <div className="flex items-center gap-6 mb-4">
+              <img src={perceptionLogo} alt="Perception Logo" className="w-16 h-16 md:w-24 md:h-24 invert object-contain" />
+              <h2 className="text-5xl md:text-7xl font-display text-primary">Perception</h2>
+            </div>
             <p className="text-secondary text-lg">
               Visual storytelling, narrative fiction, and documentary filmmaking. 
               The movie making division of PMC.

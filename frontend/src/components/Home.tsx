@@ -10,6 +10,7 @@ export default function Home() {
   const textRef = useRef(null);
   const mediaRef = useRef(null);
   const overlayRef = useRef(null);
+  const edgeTextRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -52,7 +53,13 @@ export default function Home() {
         .to(overlayRef.current, {
           opacity: 0,
           ease: "power2.out"
-        }, 0);
+        }, 0)
+        
+        // 4. Edge text fades in after a little bit of scroll
+        .to(edgeTextRef.current, {
+          opacity: 1,
+          ease: "power2.inOut"
+        }, 0.15);
 
     }, container);
     return () => ctx.revert();
@@ -65,9 +72,22 @@ export default function Home() {
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
+        {/* Edge Text Containers (Fixed in the background area, separate from scaling media) */}
+        <div ref={edgeTextRef} className="absolute inset-0 z-0 pointer-events-none opacity-0 flex justify-between items-center w-full">
+          {/* Left Edge Text */}
+          <div className="absolute left-6 md:left-12 -rotate-90 origin-left mix-blend-screen opacity-50">
+            <span className="text-white font-display font-bold text-4xl md:text-[6vw] tracking-tighter" style={{ transform: 'scaleY(1.8) translateY(100%)', display: 'inline-block' }}>CHOOSE PASSION.</span>
+          </div>
+          
+          {/* Right Edge Text */}
+          <div className="absolute right-6 md:right-12 rotate-90 origin-right mix-blend-screen opacity-50">
+            <span className="text-white font-display font-bold text-4xl md:text-[6vw] tracking-tighter" style={{ transform: 'scaleY(1.8) translateY(100%)', display: 'inline-block' }}>CHOOSE PMC</span>
+          </div>
+        </div>
+
         {/* Layer 1: Media Container (Image / Future Video) */}
         {/* Note: This is ready for a 3D video. Just swap the img for a video tag! */}
-        <div ref={mediaRef} className="absolute inset-0 z-0 flex items-center justify-center p-4 md:p-8">
+        <div ref={mediaRef} className="absolute inset-0 z-10 flex items-center justify-center p-4 md:p-8">
           <div className="relative w-full h-full max-w-7xl bg-black shadow-[0_0_100px_rgba(0,0,0,1)] rounded-md overflow-hidden border border-white/5">
             <img 
               src={pmcBg} 
@@ -76,16 +96,6 @@ export default function Home() {
             />
             {/* Dark overlay to simulate depth fading */}
             <div ref={overlayRef} className="absolute inset-0 bg-black/80"></div>
-            
-            {/* Left Edge Text */}
-            <div className="absolute top-1/2 left-4 md:left-12 -translate-y-1/2 -rotate-90 origin-center pointer-events-none mix-blend-plus-lighter opacity-80">
-              <span className="text-white font-display font-bold text-2xl md:text-5xl tracking-tighter" style={{ transform: 'scaleY(1.5)', display: 'inline-block' }}>CHOOSE PASSION.</span>
-            </div>
-            
-            {/* Right Edge Text */}
-            <div className="absolute top-1/2 right-4 md:right-12 -translate-y-1/2 rotate-90 origin-center pointer-events-none mix-blend-plus-lighter opacity-80">
-              <span className="text-white font-display font-bold text-2xl md:text-5xl tracking-tighter" style={{ transform: 'scaleY(1.5)', display: 'inline-block' }}>CHOOSE PMC</span>
-            </div>
           </div>
         </div>
 

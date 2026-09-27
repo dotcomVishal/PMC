@@ -7,6 +7,7 @@ import img2 from '../images/lrm2.jpg';
 import img3 from '../images/lrm3.jpg';
 import img4 from '../images/vishal_action.jpeg';
 import img5 from '../images/adit.webp';
+import shutterbugsLogo from '../images/shutterbugs.jpg';
 import FilmStrip from './FilmStrip';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,7 +40,10 @@ export default function Shutterbugs() {
       <div className="max-w-7xl mx-auto relative z-10 pt-8">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
-            <h2 className="text-5xl md:text-7xl font-display mb-4 text-primary">Shutterbugs</h2>
+            <div className="flex items-center gap-6 mb-4">
+              <img src={shutterbugsLogo} alt="Shutterbugs Logo" className="w-16 h-16 md:w-24 md:h-24 invert object-contain" />
+              <h2 className="text-5xl md:text-7xl font-display text-primary">Shutterbugs</h2>
+            </div>
             <p className="text-secondary max-w-xl text-lg">
               Capturing fleeting moments and transforming them into timeless visual artistry. 
               The photography division of PMC.
