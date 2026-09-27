@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import FilmStrip from './FilmStrip';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,8 +38,9 @@ export default function Team() {
   }, []);
 
   return (
-    <section ref={container} className="pt-40 pb-24 px-6 md:px-12 bg-surface min-h-screen">
-      <div className="max-w-7xl mx-auto">
+    <section ref={container} className="pt-40 pb-24 px-6 md:px-12 bg-surface min-h-screen relative overflow-hidden">
+      <FilmStrip position="bottom" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-5xl md:text-7xl font-display mb-16 text-primary text-center">The Team</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

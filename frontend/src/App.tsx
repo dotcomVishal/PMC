@@ -10,6 +10,7 @@ import Shutterbugs from './components/Shutterbugs';
 import Perception from './components/Perception';
 import Team from './components/Team';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="bg-background text-primary min-h-screen font-sans">
         <Navbar />
         <Routes>
