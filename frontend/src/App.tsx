@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Hero from './components/Hero';
+
+import Navbar from './components/Navbar';
+import Home from './components/Home';
 import Shutterbugs from './components/Shutterbugs';
 import Perception from './components/Perception';
 import Team from './components/Team';
@@ -28,14 +31,10 @@ function App() {
     }
 
     requestAnimationFrame(raf);
-
-    // Update ScrollTrigger on Lenis scroll
     lenis.on('scroll', ScrollTrigger.update);
-
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-    
     gsap.ticker.lagSmoothing(0, 0);
 
     return () => {
@@ -45,13 +44,17 @@ function App() {
   }, []);
 
   return (
-    <main className="bg-background text-primary min-h-screen">
-      <Hero />
-      <Shutterbugs />
-      <Perception />
-      <Team />
-      <Footer />
-    </main>
+    <Router>
+      <div className="bg-background text-primary min-h-screen font-sans">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shutterbugs" element={<><Shutterbugs /><Footer /></>} />
+          <Route path="/perception" element={<><Perception /><Footer /></>} />
+          <Route path="/team" element={<><Team /><Footer /></>} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

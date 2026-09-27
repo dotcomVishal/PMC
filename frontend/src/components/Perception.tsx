@@ -31,7 +31,7 @@ export default function Perception() {
   ];
 
   return (
-    <section ref={container} className="py-24 px-6 md:px-12 bg-background relative overflow-hidden">
+    <section ref={container} className="pt-40 pb-24 px-6 md:px-12 bg-background relative overflow-hidden min-h-screen">
       {/* Decorative film strips */}
       <div className="absolute top-0 left-0 w-full h-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMWExYTFhIi8+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9IiMwYTBhMGEiLz48L3N2Zz4=')] opacity-20"></div>
       

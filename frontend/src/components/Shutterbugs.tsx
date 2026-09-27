@@ -33,7 +33,7 @@ export default function Shutterbugs() {
   }, []);
 
   return (
-    <section ref={container} className="py-24 px-6 md:px-12 bg-surface">
+    <section ref={container} className="pt-40 pb-24 px-6 md:px-12 bg-surface min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
