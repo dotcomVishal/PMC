@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import pmcBg from '../images/pmc.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,7 +62,7 @@ export default function Hero() {
       <div 
         ref={bgRef}
         className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop")' }}
+        style={{ backgroundImage: `url(${pmcBg})` }}
       >
         <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]"></div>
       </div>

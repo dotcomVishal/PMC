@@ -26,8 +26,8 @@ export default function Perception() {
   }, []);
 
   const movies = [
-    { title: "Blink", award: "Inter-IIT Gold Medal", image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800&auto=format&fit=crop" },
-    { title: "Sapne", award: "Inter-IIT Silver Medal", image: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800&auto=format&fit=crop" }
+    { title: "Hello", award: "Inter-IIT Silver Medal (8.0)", image: "https://img.youtube.com/vi/d1UZLb5YJrM/maxresdefault.jpg", link: "https://youtu.be/d1UZLb5YJrM?si=orIrGgTnN9EEBCKR" },
+    { title: "Euphony", award: "Inter-IIT Submission (7.0)", image: "https://img.youtube.com/vi/MM1IH3QYjh0/maxresdefault.jpg", link: "https://youtu.be/MM1IH3QYjh0?si=a5d1k_bkc1ztexLc" }
   ];
 
   return (
@@ -45,10 +45,10 @@ export default function Perception() {
             </p>
           </div>
           <div className="flex gap-4 mt-6 md:mt-0">
-            <a href="https://youtube.com/perception_iitmandi" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
+            <a href="https://www.youtube.com/@PerceptionIITMandi/" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
               <Video size={24} />
             </a>
-            <a href="https://instagram.com/perception_iitmandi" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
+            <a href="https://www.instagram.com/perception_iitmandi/" target="_blank" rel="noreferrer" className="p-3 border border-secondary/30 hover:border-primary rounded-full hover:bg-white/10 transition-colors">
               <Video size={24} />
             </a>
           </div>
@@ -56,7 +56,7 @@ export default function Perception() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {movies.map((movie, i) => (
-            <div key={i} className="video-card group cursor-pointer relative aspect-video bg-surface overflow-hidden rounded-md border border-white/5">
+            <a href={movie.link} target="_blank" rel="noreferrer" key={i} className="video-card group cursor-pointer relative aspect-video bg-surface overflow-hidden rounded-md border border-white/5 block">
               <img 
                 src={movie.image} 
                 alt={movie.title} 
@@ -74,7 +74,7 @@ export default function Perception() {
                 <p className="text-sm text-yellow-500 font-medium mb-2 uppercase tracking-widest">{movie.award}</p>
                 <h3 className="text-4xl font-display text-white">{movie.title}</h3>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

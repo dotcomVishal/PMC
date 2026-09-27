@@ -2,17 +2,15 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Camera } from 'lucide-react';
+import img1 from '../images/lrm1.jpg';
+import img2 from '../images/lrm2.jpg';
+import img3 from '../images/lrm3.jpg';
+import img4 from '../images/vishal_action.jpeg';
+import img5 from '../images/adit.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [
-  "https://images.unsplash.com/photo-1516224584288-5f917573d82f?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?q=80&w=800&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?q=80&w=800&auto=format&fit=crop"
-];
+const images = [img1, img2, img3, img4, img5];
 
 export default function Shutterbugs() {
   const container = useRef(null);
@@ -46,13 +44,13 @@ export default function Shutterbugs() {
             </p>
           </div>
           <a 
-            href="https://instagram.com/shutterbugs_iitmandi" 
+            href="https://www.instagram.com/shutterbugs.iitmandi/" 
             target="_blank" 
             rel="noreferrer"
             className="flex items-center gap-2 mt-6 md:mt-0 px-6 py-3 border border-secondary/30 hover:border-primary hover:bg-primary hover:text-background transition-all duration-300 rounded-full font-medium"
           >
             <Camera size={20} />
-            <span>@shutterbugs_iitmandi</span>
+            <span>@shutterbugs.iitmandi</span>
           </a>
         </div>
         
