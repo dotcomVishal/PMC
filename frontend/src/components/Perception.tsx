@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Video, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import FilmStrip from './FilmStrip';
 
 gsap.registerPlugin(ScrollTrigger);
