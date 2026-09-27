@@ -68,11 +68,11 @@ export default function Home() {
         {/* Layer 1: Media Container (Image / Future Video) */}
         {/* Note: This is ready for a 3D video. Just swap the img for a video tag! */}
         <div ref={mediaRef} className="absolute inset-0 z-0 flex items-center justify-center p-4 md:p-8">
-          <div className="relative w-full h-full max-w-7xl shadow-[0_0_100px_rgba(0,0,0,1)] rounded-md overflow-hidden border border-white/5">
+          <div className="relative w-full h-full max-w-7xl bg-black shadow-[0_0_100px_rgba(0,0,0,1)] rounded-md overflow-hidden border border-white/5">
             <img 
               src={pmcBg} 
               alt="PMC Core Team" 
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-contain object-center"
             />
             {/* Dark overlay to simulate depth fading */}
             <div ref={overlayRef} className="absolute inset-0 bg-black/80"></div>
