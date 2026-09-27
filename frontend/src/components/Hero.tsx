@@ -12,38 +12,28 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Pinning the hero section
-      ScrollTrigger.create({
-        trigger: container.current,
-        start: 'top top',
-        end: '+=100%',
-        pin: true,
-        pinSpacing: true,
+      // Create a single timeline for the pinned hero section
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top top',
+          end: '+=100%',
+          scrub: 1, // Add a slight smoothing to the scrub
+          pin: true,
+        }
       });
 
-      // Parallax and fade effect on text
-      gsap.to(textRef.current, {
-        y: -150,
+      // Parallax text and background simultaneously
+      tl.to(textRef.current, { 
+        y: -150, 
         opacity: 0,
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-
-      // Parallax on background image
-      gsap.to(bgRef.current, {
-        y: 200,
-        scale: 1.1,
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
+        force3D: true 
+      }, 0)
+      .to(bgRef.current, { 
+        y: 150, 
+        scale: 1.05,
+        force3D: true 
+      }, 0);
       
       // Initial Reveal Animation
       gsap.from(textRef.current, {
@@ -51,6 +41,7 @@ export default function Hero() {
         opacity: 0,
         duration: 1.5,
         ease: 'power4.out',
+        force3D: true
       });
     }, container);
 
@@ -61,7 +52,7 @@ export default function Hero() {
     <section ref={container} className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       <div 
         ref={bgRef}
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-center will-change-transform"
         style={{ backgroundImage: `url(${pmcBg})` }}
       >
         <div className="absolute inset-0 bg-background/40"></div>
