@@ -10,6 +10,8 @@ export default function Navbar() {
     { name: 'Team', path: '/team' }
   ];
 
+  if (location.pathname === '/') return null;
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 p-6 mix-blend-difference">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
