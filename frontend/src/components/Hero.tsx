@@ -64,7 +64,7 @@ export default function Hero() {
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${pmcBg})` }}
       >
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-background/40"></div>
       </div>
       
       <div ref={textRef} className="relative z-10 text-center px-4">
