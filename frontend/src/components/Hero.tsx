@@ -30,8 +30,8 @@ export default function Hero() {
         force3D: true 
       }, 0)
       .to(bgRef.current, { 
-        y: 150, 
-        scale: 1.05,
+        y: -50, 
+        scale: 1.1,
         force3D: true 
       }, 0);
       
