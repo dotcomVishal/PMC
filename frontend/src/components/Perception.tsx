@@ -40,7 +40,9 @@ export default function Perception() {
         <div className="flex flex-col md:flex-row justify-between items-start mb-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-6 mb-4">
-              <img src={perceptionLogo} alt="Perception Logo" className="w-16 h-16 md:w-24 md:h-24 invert object-contain" />
+              <div className="mix-blend-screen flex-shrink-0">
+                <img src={perceptionLogo} alt="Perception Logo" className="w-16 h-16 md:w-24 md:h-24 invert object-contain" />
+              </div>
               <h2 className="text-5xl md:text-7xl font-display text-primary">Perception</h2>
             </div>
             <p className="text-secondary text-lg">

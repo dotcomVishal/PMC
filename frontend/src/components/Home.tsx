@@ -19,93 +19,73 @@ export default function Home() {
           trigger: container.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 1, // Smooth, heavy scrub for cinematic feel
+          scrub: 2, // increased for smoother effect
         }
       });
 
-      // Pure, clean 3D depth scroll
       tl
-        // 1. Text flies towards the camera and fades out
-        .to(textRef.current, { 
-          scale: 10, 
-          opacity: 0, 
-          ease: "power3.in",
-          force3D: true 
-        }, 0)
-        
-        // 2. The Media (Image/Video) scales up smoothly from the deep background
-        .fromTo(mediaRef.current,
-          { 
-            scale: 0.4, 
-            opacity: 0.1,
-            y: 50,
-          },
-          {
-            scale: 1.1, // Slight overflow for parallax effect
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-            force3D: true
-          }, 0
-        )
-        
-        // 3. Dark overlay fades out as the image gets closer
-        .to(overlayRef.current, {
-          opacity: 0,
-          ease: "power2.out"
-        }, 0)
-        
-        // 4. Edge text fades in after a little bit of scroll
-        .to(edgeTextRef.current, {
-          opacity: 1,
-          ease: "power2.inOut"
-        }, 0.15);
+        .to(textRef.current, { scale: 60, opacity: 0, ease: "power3.in", force3D: true }, 0)
+        .fromTo(mediaRef.current, { scale: 0.4, opacity: 0.1, y: 50 }, { scale: 1.1, opacity: 1, y: 0, ease: "power2.out", force3D: true }, 0)
+        .to(overlayRef.current, { opacity: 0, ease: "power2.out" }, 0)
+        .to(edgeTextRef.current, { opacity: 1, ease: "power2.inOut" }, 0.15)
+        .set(document.querySelector('#navbar-content'), { opacity: 0 }, 0)
+        .to(document.querySelector('#navbar-content'), { opacity: 1, ease: "power2.inOut" }, 0.15);
 
     }, container);
     return () => ctx.revert();
   }, []);
 
   return (
-    // 300vh for a perfect, deliberate scroll distance
     <main ref={container} className="relative h-[300vh] w-full bg-[#030303]">
-      
-      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
-        {/* Edge Text Containers (Fixed in the background area, separate from scaling media) */}
-        <div ref={edgeTextRef} className="absolute inset-0 z-0 pointer-events-none opacity-0 flex justify-between items-center w-full">
-          {/* Left Edge Text */}
-          <div className="absolute left-6 md:left-12 -rotate-90 origin-left mix-blend-screen opacity-50">
-            <span className="text-white font-display font-bold text-4xl md:text-[6vw] tracking-tighter" style={{ transform: 'scaleY(1.8) translateY(100%)', display: 'inline-block' }}>CHOOSE PASSION.</span>
-          </div>
+        {/* EDGE TEXT LAYER */}
+        <div ref={edgeTextRef} className="absolute inset-0 z-20 pointer-events-none opacity-0 flex items-center justify-center p-4 md:p-8 will-change-[opacity,transform]">
           
-          {/* Right Edge Text */}
-          <div className="absolute right-6 md:right-12 rotate-90 origin-right mix-blend-screen opacity-50">
-            <span className="text-white font-display font-bold text-4xl md:text-[6vw] tracking-tighter" style={{ transform: 'scaleY(1.8) translateY(100%)', display: 'inline-block' }}>CHOOSE PMC</span>
+          {/* THE FIX: We perfectly mirror the image's max-w-7xl size. 
+              We will anchor the text directly to the outside of this box. */}
+          <div className="relative w-full h-full max-w-7xl">
+            
+            {/* TOP/LEFT EDGE TEXT */}
+            <div className="absolute top-0 left-0 right-0 h-[40px] mt-24 md:mt-0 md:top-0 md:bottom-0 md:right-full md:left-auto md:w-[120px] md:h-auto md:mr-6 flex items-center justify-center mix-blend-screen opacity-50">
+              <div className="whitespace-nowrap scale-y-[1.8] rotate-0 md:-rotate-90 origin-center transition-transform">
+                <span className="text-white font-display font-bold text-4xl md:text-5xl xl:text-[70px] tracking-tighter">
+                  CHOOSE PASSION
+                </span>
+              </div>
+            </div>
+
+            {/* BOTTOM/RIGHT EDGE TEXT */}
+            <div className="absolute bottom-0 left-0 right-0 h-[40px] mb-24 md:mb-0 md:top-0 md:bottom-0 md:left-full md:right-auto md:w-[120px] md:h-auto md:ml-6 flex items-center justify-center mix-blend-screen opacity-50">
+              <div className="whitespace-nowrap scale-y-[1.8] rotate-0 md:rotate-90 origin-center transition-transform">
+                <span className="text-white font-display font-bold text-4xl md:text-5xl xl:text-[70px] tracking-tighter">
+                  CHOOSE PMC
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* Layer 1: Media Container (Image / Future Video) */}
-        {/* Note: This is ready for a 3D video. Just swap the img for a video tag! */}
-        <div ref={mediaRef} className="absolute inset-0 z-10 flex items-center justify-center p-4 md:p-8">
+        {/* LAYER 1: MEDIA CONTAINER */}
+        <div ref={mediaRef} className="absolute inset-0 z-10 flex items-center justify-center p-4 md:p-8 will-change-transform">
           <div className="relative w-full h-full max-w-7xl bg-black shadow-[0_0_100px_rgba(0,0,0,1)] rounded-md overflow-hidden border border-white/5">
             <img 
               src={pmcBg} 
               alt="PMC Core Team" 
-              className="w-full h-full object-contain object-center"
+              className="w-full h-full object-contain object-center will-change-transform"
             />
-            {/* Dark overlay to simulate depth fading */}
-            <div ref={overlayRef} className="absolute inset-0 bg-black/80"></div>
+            <div ref={overlayRef} className="absolute inset-0 bg-black/80 will-change-[opacity]"></div>
           </div>
         </div>
 
-        {/* Layer 2: Clean Typography */}
-        <div ref={textRef} className="relative z-10 text-center px-4 flex flex-col items-center mix-blend-difference text-white pointer-events-none">
+        {/* LAYER 2: CLEAN TYPOGRAPHY */}
+        <div ref={textRef} className="relative z-10 text-center px-4 flex flex-col items-center mix-blend-difference text-white pointer-events-none will-change-[transform,opacity]">
           <h1 className="text-7xl md:text-[12vw] font-display uppercase tracking-[0.1em] drop-shadow-2xl leading-none font-bold">
             PMC
           </h1>
-          <p className="mt-6 text-sm md:text-xl text-white/80 max-w-xl mx-auto font-light tracking-[0.4em] uppercase">
-            Scroll to Explore
+          <p className="mt-4 md:mt-6 text-[10px] sm:text-xs md:text-base lg:text-xl text-white/80 max-w-2xl mx-auto font-light tracking-[0.2em] md:tracking-[0.4em] uppercase text-center px-4">
+            Photography and Movie-Making Club
           </p>
         </div>
 
