@@ -29,6 +29,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: pmc-backend
+    environment:
+      - PORT=3000
+      - DATA_PATH=/data
+      - FIREBASE_SERVICE_ACCOUNT_PATH=/app/serviceaccountkey.json
+      - ADMIN_EMAILS=b25339@students.iitmandi.ac.in
+    volumes:
+      - ./data:/data
+      - ./serviceaccountkey.json:/app/serviceaccountkey.json:ro
     networks:
       - pmc-network
     restart: unless-stopped

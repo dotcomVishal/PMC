@@ -6,76 +6,85 @@ import pmcBg from '../images/pmc.png';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const container = useRef(null);
-  const textRef = useRef(null);
-  const mediaRef = useRef(null);
-  const overlayRef = useRef(null);
-  const edgeTextRef = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const edgeTextRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const navbarContent = document.querySelector('#navbar-content');
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 2, // increased for smoother effect
+          scrub: 2, // Smooth, cinematic follow effect
         }
       });
 
       tl
-        .to(textRef.current, { scale: 60, opacity: 0, ease: "power3.in", force3D: true }, 0)
-        .fromTo(mediaRef.current, { scale: 0.4, opacity: 0.1, y: 50 }, { scale: 1.1, opacity: 1, y: 0, ease: "power2.out", force3D: true }, 0)
+        .to(textRef.current, { scale: 50, opacity: 0, ease: "power3.in", force3D: true }, 0)
+        .fromTo(mediaRef.current, { scale: 0.5, opacity: 0.1, y: 40 }, { scale: 1, opacity: 1, y: 0, ease: "power2.out", force3D: true }, 0)
         .to(overlayRef.current, { opacity: 0, ease: "power2.out" }, 0)
-        .to(edgeTextRef.current, { opacity: 1, ease: "power2.inOut" }, 0.15)
-        .set(document.querySelector('#navbar-content'), { opacity: 0 }, 0)
-        .to(document.querySelector('#navbar-content'), { opacity: 1, ease: "power2.inOut" }, 0.15);
+        .to(edgeTextRef.current, { opacity: 1, ease: "power2.inOut" }, 0.15);
+
+      if (navbarContent) {
+        tl.set(navbarContent, { opacity: 0 }, 0)
+          .to(navbarContent, { opacity: 1, ease: "power2.inOut" }, 0.15);
+      }
 
     }, container);
-    return () => ctx.revert();
+
+    return () => {
+      ctx.revert();
+      if (navbarContent) {
+        gsap.set(navbarContent, { clearProps: 'opacity' });
+      }
+    };
   }, []);
 
   return (
     <main ref={container} className="relative h-[300vh] w-full bg-[#030303]">
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
-        {/* EDGE TEXT LAYER */}
-        <div ref={edgeTextRef} className="absolute inset-0 z-20 pointer-events-none opacity-0 flex items-center justify-center p-4 md:p-8 will-change-[opacity,transform]">
+        {/* EDGE TEXT LAYER: Centered vertically in screen margins, never overlapping media */}
+        <div ref={edgeTextRef} className="absolute inset-0 z-20 pointer-events-none opacity-0 will-change-[opacity]">
           
-          {/* THE FIX: We perfectly mirror the image's max-w-7xl size. 
-              We will anchor the text directly to the outside of this box. */}
-          <div className="relative w-full h-full max-w-7xl">
-            
-            {/* TOP/LEFT EDGE TEXT */}
-            <div className="absolute top-0 left-0 right-0 h-[40px] mt-24 md:mt-0 md:top-0 md:bottom-0 md:right-full md:left-auto md:w-[120px] md:h-auto md:mr-6 flex items-center justify-center mix-blend-screen opacity-50">
-              <div className="whitespace-nowrap scale-y-[1.8] rotate-0 md:-rotate-90 origin-center transition-transform">
-                <span className="text-white font-display font-bold text-4xl md:text-5xl xl:text-[70px] tracking-tighter">
-                  CHOOSE PASSION
-                </span>
-              </div>
+          {/* LEFT EDGE TEXT */}
+          <div className="hidden lg:flex absolute left-4 xl:left-8 2xl:left-12 top-0 bottom-0 w-20 items-center justify-center select-none">
+            <div className="whitespace-nowrap -rotate-90 origin-center transition-transform scale-y-[1.4]">
+              <span className="text-white/40 font-display font-bold text-3xl md:text-4xl xl:text-5xl tracking-[0.25em]">
+                CHOOSE PASSION
+              </span>
             </div>
-
-            {/* BOTTOM/RIGHT EDGE TEXT */}
-            <div className="absolute bottom-0 left-0 right-0 h-[40px] mb-24 md:mb-0 md:top-0 md:bottom-0 md:left-full md:right-auto md:w-[120px] md:h-auto md:ml-6 flex items-center justify-center mix-blend-screen opacity-50">
-              <div className="whitespace-nowrap scale-y-[1.8] rotate-0 md:rotate-90 origin-center transition-transform">
-                <span className="text-white font-display font-bold text-4xl md:text-5xl xl:text-[70px] tracking-tighter">
-                  CHOOSE PMC
-                </span>
-              </div>
-            </div>
-
           </div>
+
+          {/* RIGHT EDGE TEXT */}
+          <div className="hidden lg:flex absolute right-4 xl:right-8 2xl:right-12 top-0 bottom-0 w-20 items-center justify-center select-none">
+            <div className="whitespace-nowrap rotate-90 origin-center transition-transform scale-y-[1.4]">
+              <span className="text-white/40 font-display font-bold text-3xl md:text-4xl xl:text-5xl tracking-[0.25em]">
+                CHOOSE PMC
+              </span>
+            </div>
+          </div>
+
         </div>
 
         {/* LAYER 1: MEDIA CONTAINER */}
         <div ref={mediaRef} className="absolute inset-0 z-10 flex items-center justify-center p-4 md:p-8 will-change-transform">
-          <div className="relative w-full h-full max-w-7xl bg-black shadow-[0_0_100px_rgba(0,0,0,1)] rounded-md overflow-hidden border border-white/5">
+          <div className="relative w-full h-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl bg-[#030303] flex items-center justify-center overflow-hidden">
             <img 
               src={pmcBg} 
               alt="PMC Core Team" 
-              className="w-full h-full object-contain object-center will-change-transform"
+              className="w-full h-full object-contain object-center will-change-transform [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_95%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_95%)]"
+              loading="eager"
             />
-            <div ref={overlayRef} className="absolute inset-0 bg-black/80 will-change-[opacity]"></div>
+            {/* Soft vignette to blend photo backdrop seamlessly into website background */}
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_45%,#030303_95%)]"></div>
+            <div ref={overlayRef} className="absolute inset-0 bg-[#030303]/80 will-change-[opacity]"></div>
           </div>
         </div>
 

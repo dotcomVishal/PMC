@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Lenis from '@studio-freight/lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Shutterbugs from './components/Shutterbugs';
 import Perception from './components/Perception';
-import Team from './components/Team';
+import LearningFest from './components/LearningFest';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -26,21 +26,20 @@ function App() {
       touchMultiplier: 2,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    (window as any).__lenis = lenis;
 
-    requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
+
+    const ticker = (time: number) => {
       lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0, 0);
+    };
+    gsap.ticker.add(ticker);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(ticker);
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
+      delete (window as any).__lenis;
     };
   }, []);
 
@@ -51,9 +50,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/learning-fest" element={<><LearningFest /><Footer /></>} />
           <Route path="/shutterbugs" element={<><Shutterbugs /><Footer /></>} />
           <Route path="/perception" element={<><Perception /><Footer /></>} />
-          <Route path="/team" element={<><Team /><Footer /></>} />
+          <Route path="/team" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </Router>
